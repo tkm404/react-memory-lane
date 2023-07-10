@@ -19,7 +19,7 @@ function DreamControl() {
 
   const handleChangingSelectedDream = (id) => {
     const selection = mainDreamList.filter(dream => dream.id === id)[0];
-    setSelectedDream(selection)
+    setSelectedDream(selection);
   }
 
   let currentlyVisibleState = null;
