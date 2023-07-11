@@ -2,6 +2,7 @@ import React from 'react';
 import Header from 'header';
 import { BrowswerRouter as Router, Routes, Route } from "react-router-dom";
 import DreamControl from './DreamControl';
+import SignIn from "./SignIn";
 
 // import './App.css';
 
@@ -10,7 +11,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path='' />
+        <Route path='/sign-in' element={<SignIn />} />
         <Route path='/' element={<DreamControl />} />
       </Routes>
     </Router>

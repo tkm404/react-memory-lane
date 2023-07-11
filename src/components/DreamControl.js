@@ -1,17 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DreamDetail from "./DreamDetail";
 import DreamList from "./DreamList";
-
+import DreamSubmitForm from "./DreamSubmitForm";
+import EditDreamForm from "./EditDreamForm";
+import { db, auth } from './../firebase.js';
+import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 function DreamControl() {
 
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
   const [selectedDream, setSelectedDream] = useState(null);
-  const [mainDreamList, setMainDreamList] = useState([])
+  const [mainDreamList, setMainDreamList] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [error, setError] = useState(null);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const unSubscribe = onSnapshot(
+      collection(db, "dreams"),
+      (collectionSnapshot) => {
+        const dreams = [];
+        collectionSnapshot.forEach((doc) => {
+          dreams.push({
+            genre: doc.data().genre,
+            lucid: doc.data().lucid,
+            intensity: doc.data().intensity,
+            rem: doc.data().rem,
+            perceviedLength: doc.data().perceivedLength,
+            emotionalState: doc.data().emotionalState,
+            condition: doc.date().condition,
+            age: doc.data().age,
+            id: doc.id
+          });
+        })
+        setMainDreamList(dreams);
+      },
+      (error) => {
+        setError(error.message);
+      }
+    );
+    return () => unSubscribe();
+  }, []);
 
   const handleClick = () => {
     if (setFormVisibleOnPage !== false) {
       setFormVisibleOnPage(false);
+      setSelectedDream(null)
+      setEditing(false)
     } else {
       setFormVisibleOnPage(!formVisibleOnPage);
     }
@@ -22,46 +57,86 @@ function DreamControl() {
     setSelectedDream(selection);
   }
 
-  let currentlyVisibleState = null;
-  let buttonText = null;
-
-  if (selectedDream != null) {
-    currentlyVisibleState = 
-    <DreamDetail
-    dream={selectedDream}
-    // more stuff goes here
-    />
-    buttonText= "Return to the Dreamscape";
-  } else if (formVisibleOnPage) {
-    currentlyVisibleState = 
-    <React.Fragment>
-      <h3>If you are reading this, your dreams are too loud.</h3>
-    </React.Fragment>
-    buttonText = "Dare you to Press";
-  } else {
-    currentlyVisibleState=
-    <DreamList
-      onDreamSelection={handleChangingSelectedDream}
-      dreamList={mainDreamList}
-
-    />;
-    buttonText = "Press if you Dare";
+  const handleDeletingDream = async (id) => {
+    await deleteDoc(doc(db, "dreams", id));
+    setSelectedDream(null);
   }
-  
-  return (
-    <React.Fragment>
-      {currentlyVisibleState}
-      <button onClick={handleClick}>{buttonText}</button>
-    </React.Fragment>
-  )
+
+  const handleEditClick = () => {
+    setEditing(true);
+  }
+
+  const handleEditingDreamInList = async (dreamToEdit) => {
+    const dreamRef = doc(db, "dreams", dreamToEdit.id);
+    await updateDoc(dreamRef, dreamToEdit);
+    setEditing(false);
+    setSelectedDream(null);
+  }
+
+  const handleAddingNewDreamToList = async (newDreamData) => {
+    await addDoc(collection(db, "dreams"), newDreamData);
+    setFormVisibleOnPage(false);
+  }
+
+  const handleCheckboxIsChecked = () => {
+    setChecked(!checked);
+  }
+
+  if (auth.currentUser == null) {
+    return (
+      <React.Fragment>
+        <h1>You must be signed in to access the Dream State.</h1>
+      </React.Fragment>
+    )
+  } else if (auth.currentUser != null) {
+
+    let currentlyVisibleState = null;
+    let buttonText = null;
+
+    if (error) {
+      currentlyVisibleState = <p>There was an error accessing your Dream State: {error}</p>
+    } else if (editing) {
+      currentlyVisibleState =
+        <EditDreamForm
+          dream={selectedDream}
+          onEditDream={handleEditingDreamInList}
+          onCheckboxChecked={handleCheckboxIsChecked}
+        />
+      buttonText = "Return to the Dreamscape";
+
+    } else if (selectedDream != null) {
+      currentlyVisibleState =
+        <DreamDetail
+          dream={selectedDream}
+          onClickingDelete={handleDeletingDream}
+          onClickingEdit={handleEditClick}
+        />
+      buttonText = "Return to the Dreamscape";
+
+    } else if (formVisibleOnPage) {
+      currentlyVisibleState =
+        <DreamSubmitForm
+          onDreamSubmission={handleAddingNewDreamToList}
+          onCheckboxChecked={handleCheckboxIsChecked}
+        />
+      buttonText = "Dare you to Press";
+
+    } else {
+      currentlyVisibleState =
+        <DreamList
+          onDreamSelection={handleChangingSelectedDream}
+          dreamList={mainDreamList}
+        />;
+      buttonText = "Press if you Dare";
+    }
+
+    return (
+      <React.Fragment>
+        {currentlyVisibleState}
+        <button onClick={handleClick}>{buttonText}</button>
+      </React.Fragment>
+    )
+  }
 }
-
-
-
-
-
-
-
-
 
 export default DreamControl;
