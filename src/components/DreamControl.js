@@ -5,6 +5,9 @@ import DreamSubmitForm from "./DreamSubmitForm";
 import EditDreamForm from "./EditDreamForm";
 import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import BlueDreamCatcher from "./../img/dream-catcher-blue.gif";
+
+
 
 function DreamControl() {
 
@@ -14,6 +17,14 @@ function DreamControl() {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState(null);
   const [checked, setChecked] = useState(false);
+
+  const blueCatcher = {
+    width: 'auto',
+    height: 'auto',
+    display: 'block',
+    margin: 'auto'
+  }
+
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -26,13 +37,13 @@ function DreamControl() {
             lucid: doc.data().lucid,
             intensity: doc.data().intensity,
             rem: doc.data().rem,
-            perceviedLength: doc.data().perceivedLength,
+            perceivedLength: doc.data().perceivedLength,
             emotionalState: doc.data().emotionalState,
-            condition: doc.date().condition,
+            condition: doc.data().condition,
             age: doc.data().age,
             id: doc.id
           });
-        })
+        });
         setMainDreamList(dreams);
       },
       (error) => {
@@ -74,7 +85,8 @@ function DreamControl() {
   }
 
   const handleAddingNewDreamToList = async (newDreamData) => {
-    await addDoc(collection(db, "dreams"), newDreamData);
+    const collectionRef = collection(db, "dreams");
+    await addDoc(collectionRef, newDreamData);
     setFormVisibleOnPage(false);
   }
 
@@ -86,6 +98,9 @@ function DreamControl() {
     return (
       <React.Fragment>
         <h1>You must be signed in to access the Dream State.</h1>
+        <div style={blueCatcher}> 
+        <img src={BlueDreamCatcher} alt="a blue dreamcatcher"/>
+        </div>
       </React.Fragment>
     )
   } else if (auth.currentUser != null) {
@@ -119,7 +134,7 @@ function DreamControl() {
           onDreamSubmission={handleAddingNewDreamToList}
           onCheckboxChecked={handleCheckboxIsChecked}
         />
-      buttonText = "Dare you to Press";
+      buttonText = "Return to the Dreamscape";
 
     } else {
       currentlyVisibleState =
@@ -127,7 +142,7 @@ function DreamControl() {
           onDreamSelection={handleChangingSelectedDream}
           dreamList={mainDreamList}
         />;
-      buttonText = "Press if you Dare";
+      buttonText = "Log A Dream";
     }
 
     return (

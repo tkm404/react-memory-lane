@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { auth } from './../firebase.js'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+// import Form from 'react-bootstrap/Form';
+// import Button from 'react-bootstrap/Button';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+
 
 function SignIn(){
   const [signUpSuccess, setSignUpSuccess] = useState(null);
@@ -53,7 +59,7 @@ function SignIn(){
           name='email'
           placeholder='email' />
         <input
-          type='text'
+          type='password'
           name='password'
           placeholder='Password' />
         <button type='submit'>Sign up</button>
@@ -75,8 +81,67 @@ function SignIn(){
       <h1>Sign Out</h1>
       {signOutSuccess}
       <button onClick={doSignOut}>Sign out</button>
-
     </React.Fragment>
+    
+    // Something to do with scope possibly, bootstrap reformatting breaks it!
+
+    // <Container> 
+    // <React.Fragment>
+    //     <Row>
+    //       <Col xs={6}>
+    //       <h1>Sign Up</h1>
+    //         <Form>
+    //         {signUpSuccess}
+    //           <Form.Group className="mb-3" onSubmit={signUp}>
+    //           <Form.Label>Email</Form.Label>
+    //           <Form.Control 
+    //             type='text'
+    //             name='email'
+    //             placeholder='email' />
+    //           </Form.Group>
+    //           <Form.Group className="mb-3">
+    //           <Form.Label>Password</Form.Label>
+    //           <Form.Control
+    //             type='password'
+    //             name='password'
+    //             placeholder='Password' />
+    //           </Form.Group> 
+    //           <Button variant="primary" size="sm" type='submit'>Sign up</Button>
+    //         </Form>
+    //       </Col>
+    //     </Row>
+
+    //     <Row>
+    //       <Col xs={6}>
+    //       <h1>Sign In</h1>
+    //       <Form>
+    //       {signInSuccess}
+    //         <Form.Group className="mb-3" onSubmit={signIn}>
+    //           <Form.Label>Email</Form.Label>
+    //           <Form.Control
+    //             type='text'
+    //             name='signinEmail'
+    //             placeholder='email' />
+    //           </Form.Group>
+    //           <Form.Group className="mb-3">
+    //           <Form.Label>Password</Form.Label>
+    //           <Form.Control
+    //             type='password'
+    //             name='signinPassword'
+    //             placeholder='Password' />
+    //           </Form.Group>
+    //           <Button variant="primary" size="sm" type='submit'>Sign in</Button>
+    //         </Form>
+    //         </Col>
+    //       </Row>
+
+    //       <h1>Sign Out</h1>
+    //       {signOutSuccess}
+    //       <Button variant="primary" size="sm" onClick={doSignOut}>Sign out</Button>
+      
+    //   </React.Fragment>
+    //   </Container>
+
   );
 }
 

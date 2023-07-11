@@ -6,14 +6,14 @@ function Dream(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenDreamClicked(props.id)}>
-        <h3>{props.genre}</h3>
-        <p>{props.lucid}</p>
-        <p>{props.intensity}</p>
-        <p>{props.rem}</p>
-        <p>{props.perceivedLength}</p>
-        <p>{props.emotionalState}</p>
-        <p>{props.condition}</p>
-        <p>{props.age}</p>
+        <h3>Dream Genre: {props.genre}</h3>
+        <p>Dream Lucidity: {props.lucid}</p>
+        <p>Dream Intensity: {props.intensity}</p>
+        <p>REM Stage: {props.rem}</p>
+        <p>Perceived Length of Dream: {props.perceivedLength}</p>
+        <p>Emotional State: {props.emotionalState}</p>
+        <p>Sleep Condition(s): {props.condition}</p>
+        <p>Age of Dreamer: {props.age}</p>
         <hr/>
       </div>
     </React.Fragment>
@@ -23,13 +23,16 @@ function Dream(props){
 Dream.propTypes = {
   whenDreamClicked: PropTypes.func,
   genre: PropTypes.string, 
-  lucid: PropTypes.bool,
+  lucid: PropTypes.string,
   intensity: PropTypes.number,
   rem: PropTypes.string,
   perceivedLength: PropTypes.string, 
   emotionalState: PropTypes.string,
   condition: PropTypes.string,
-  age: PropTypes.number
+  age: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(['ungiven'])
+  ])
 }
 
 export default Dream;
