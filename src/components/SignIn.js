@@ -23,11 +23,11 @@ function SignIn(){
 
   function signIn(event) {
     event.preventDefault();
-    const email = event.target.sigininEmail.value;
-    const password = event.targe.signinPassword.value;
+    const email = event.target.signinEmail.value;
+    const password = event.target.signinPassword.value;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setSignInSuccess(`You've successfully signed in as ${userCredential.user}!`)
+        setSignInSuccess(`You've successfully signed in as ${userCredential.user.email}!`)
       })
       .catch((error) => {
         setSignInSuccess(`There was an error signing in: ${error.message}`)
@@ -53,7 +53,7 @@ function SignIn(){
           name='email'
           placeholder='email' />
         <input
-          type='password'
+          type='text'
           name='password'
           placeholder='Password' />
         <button type='submit'>Sign up</button>

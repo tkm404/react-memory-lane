@@ -43,10 +43,10 @@ function DreamControl() {
   }, []);
 
   const handleClick = () => {
-    if (setFormVisibleOnPage !== false) {
+    if (selectedDream !== null) {
       setFormVisibleOnPage(false);
-      setSelectedDream(null)
-      setEditing(false)
+      setSelectedDream(null);
+      setEditing(false);
     } else {
       setFormVisibleOnPage(!formVisibleOnPage);
     }

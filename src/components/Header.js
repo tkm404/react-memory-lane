@@ -14,7 +14,7 @@ function Header() {
           <Link to=''> Align Spiritually </Link>
         </li>
         <li>
-          <Link to='/sign-in'>Manage your Dream Accout</Link>
+          <Link to='/sign-in'>Manage your Dream Account</Link>
         </li>
       </ul>
     </React.Fragment>
