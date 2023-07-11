@@ -15,7 +15,7 @@ function DreamDetail(){
 }
 
 DreamDetail.propTypes = {
-
+  dream: PropTypes.object
 };
 
 export default DreamDetail;
