@@ -24,14 +24,17 @@ Dream.propTypes = {
   whenDreamClicked: PropTypes.func,
   genre: PropTypes.string, 
   lucid: PropTypes.string,
-  intensity: PropTypes.number,
+  intensity: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(["Ungiven/Unknown"])
+  ]),
   rem: PropTypes.string,
   perceivedLength: PropTypes.string, 
   emotionalState: PropTypes.string,
   condition: PropTypes.string,
   age: PropTypes.oneOfType([
     PropTypes.number,
-    PropTypes.oneOf(['ungiven'])
+    PropTypes.oneOf(['Ungiven/Unknown'])
   ])
 }
 

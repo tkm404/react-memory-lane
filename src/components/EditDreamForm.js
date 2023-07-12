@@ -8,14 +8,14 @@ function EditDreamForm(props) {
   function handleEditDreamFormSubmission(event) {
     event.preventDefault();
     props.onEditDream({
-      genre: event.target.genre.value,
+      genre: event.target.genre.value || "Ungiven/Unknown",
       lucid: event.target.lucid.value,
       intensity: parseInt(event.target.intensity.value),
-      rem: event.target.rem.value,
-      perceivedLength: event.target.perceivedLength.value,
-      emotionalState: event.target.emotionalState.value,
-      condition: event.target.condition.value,
-      age: parseInt(event.target.age.value) || "ungiven",
+      rem: event.target.rem.value || "Ungiven/Unknown",
+      perceivedLength: event.target.perceivedLength.value || "Ungiven/Unknown",
+      emotionalState: event.target.emotionalState.value || "Ungiven/Unknown",
+      condition: event.target.condition.value || "Ungiven/Unknown",
+      age: parseInt(event.target.age.value) || "Ungiven/Unknown",
       id: dream.id
     })
   }

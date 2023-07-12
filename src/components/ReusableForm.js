@@ -12,6 +12,7 @@ function ReusableForm(props) {
         <input
           type='text'
           name='genre'
+          // placeholders passed down from Edit form
           placeholder={props.dreamGenre}/>
 
         <br />
