@@ -15,6 +15,7 @@ function DreamList(props){
         <div className="p-3 mb-2 bg-dark bg-gradient text-white rounded-5">
         {props.dreamList.map((dream) =>
         <Dream 
+        dreamerIs = {dream.dreamUser}
         whenDreamClicked={props.onDreamSelection}
         genre={dream.genre}
         lucid={dream.lucid}
@@ -24,6 +25,7 @@ function DreamList(props){
         condition={dream.condition}
         emotionalState={dream.emotionalState}
         perceivedLength={dream.perceivedLength}
+        // userId ={something.uid}
         id={dream.id}      
         key={dream.id}/> 
         )}

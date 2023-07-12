@@ -3,14 +3,14 @@ import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
 
 function EditDreamForm(props) {
-  const { dream } = props;
+  const { dream, boxNotChecked, onCheckboxChecked, dreamUser  } = props;
 
   function handleEditDreamFormSubmission(event) {
     event.preventDefault();
     props.onEditDream({
       genre: event.target.genre.value || "Ungiven/Unknown",
       lucid: event.target.lucid.value,
-      intensity: parseInt(event.target.intensity.value),
+      intensity: parseInt(event.target.intensity.value) || "Ungiven/Unknown",
       rem: event.target.rem.value || "Ungiven/Unknown",
       perceivedLength: event.target.perceivedLength.value || "Ungiven/Unknown",
       emotionalState: event.target.emotionalState.value || "Ungiven/Unknown",
@@ -32,9 +32,11 @@ function EditDreamForm(props) {
         dreamEmotion = {dream.emotionalState}
         dreamCondition = {dream.condition}
         dreamAge = {dream.age}
+        
+        dreamer = {dreamUser}
         formSummissionHandler={handleEditDreamFormSubmission}
-        notChecked = {props.boxNotChecked}
-        whenCheckboxChecked = {props.onCheckboxChecked}
+        notChecked = {boxNotChecked}
+        whenCheckboxChecked = {onCheckboxChecked}
         buttonText="Update Dream" />
     </React.Fragment>
   )

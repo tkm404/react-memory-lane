@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import Form from 'react-bootstrap/Form';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
 
 
 
@@ -7,7 +11,14 @@ function ReusableForm(props) {
   return(
     <React.Fragment>
       <hr />
-      <form onSubmit={props.formSummissionHandler}>
+        <form onSubmit={props.formSummissionHandler}>
+          <label> Tell us about your dream,
+          <input 
+            type="text"
+            name="dreamUser"
+            defaultValue={props.dreamer}
+            readOnly></input>
+            </label>
         <label>Can you recall the dream genre? </label> 
         <input
           type='text'

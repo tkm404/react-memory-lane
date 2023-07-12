@@ -6,7 +6,8 @@ function Dream(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenDreamClicked(props.id)}>
-        <h3>Dream Genre: {props.genre}</h3>
+        <h3>The Dreamer: {props.dreamUser}</h3>
+        <p>Dream Genre: {props.genre}</p>
         <p>Dream Lucidity: {props.lucid}</p>
         <p>Dream Intensity: {props.intensity}</p>
         <p>REM Stage: {props.rem}</p>
@@ -20,7 +21,9 @@ function Dream(props){
   )
 }
 
+// "oneOfType" will safeguard against blank number entires, as long as it remains exactly the same in other statements.
 Dream.propTypes = {
+  dreamUser: PropTypes.string,
   whenDreamClicked: PropTypes.func,
   genre: PropTypes.string, 
   lucid: PropTypes.string,

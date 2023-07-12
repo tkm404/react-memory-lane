@@ -33,6 +33,7 @@ function DreamControl() {
         const dreams = [];
         collectionSnapshot.forEach((doc) => {
           dreams.push({
+            dreamUser: doc.data().dreamUser, //user info?
             genre: doc.data().genre,
             lucid: doc.data().lucid,
             intensity: doc.data().intensity,
@@ -98,6 +99,8 @@ function DreamControl() {
     setChecked(!checked);
   }
 
+
+
   if (auth.currentUser == null) {
     return (
       <React.Fragment>
@@ -107,7 +110,9 @@ function DreamControl() {
         </div>
       </React.Fragment>
     )
+  
   } else if (auth.currentUser != null) {
+    const displayName = auth.currentUser.displayName;
 
     let currentlyVisibleState = null;
     let buttonText = null;
@@ -118,6 +123,7 @@ function DreamControl() {
       currentlyVisibleState =
         <EditDreamForm
           dream={selectedDream}
+          dreamUser = {displayName}
           onEditDream={handleEditingDreamInList}
           boxNotChecked={checked}
           onCheckboxChecked={handleCheckboxIsChecked}
@@ -127,6 +133,7 @@ function DreamControl() {
     } else if (selectedDream != null) {
       currentlyVisibleState =
         <DreamDetail
+          dreamUser = {displayName}
           dream={selectedDream}
           onClickingDelete={handleDeletingDream}
           onClickingEdit={handleEditClick}
@@ -136,6 +143,7 @@ function DreamControl() {
     } else if (formVisibleOnPage) {
       currentlyVisibleState =
         <DreamSubmitForm
+          dreamUser = {displayName}
           onDreamSubmission={handleAddingNewDreamToList}
           boxNotChecked={checked}
           onCheckboxChecked={handleCheckboxIsChecked}
@@ -145,6 +153,7 @@ function DreamControl() {
     } else {
       currentlyVisibleState =
         <DreamList
+          // dreamUser = {displayName}
           onDreamSelection={handleChangingSelectedDream}
           dreamList={mainDreamList}
         />;

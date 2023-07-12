@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 function DreamDetail(props){
-  const { dream, onClickingDelete, onClickingEdit } = props;
+  const { dream, onClickingDelete, onClickingEdit, dreamUser } = props;
   
   return (
     <Container>
@@ -15,7 +15,7 @@ function DreamDetail(props){
           <React.Fragment>
           <hr/>
           <div className="p-3 mb-2 bg-dark bg-gradient text-white rounded-5">
-          <h1>Dreamers Dream</h1>
+          <h1>Dreamers Dream: {dreamUser}</h1>
           <p>Genre: {dream.genre}</p>
           <p>Lucidity: {dream.lucid}</p>
           <p>Intensity: {dream.intensity}</p>

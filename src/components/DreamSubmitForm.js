@@ -4,9 +4,11 @@ import ReusableForm from "./ReusableForm";
 
 function DreamSubmitForm(props){
 
+  // see Dream component for "oneOfType," PropType that lets us use "Ungiven/Unknown" in place of a number.
   function handleNewDreamFormSubmission(event) {
     event.preventDefault();
     props.onDreamSubmission({
+      dreamUser: event.target.dreamUser.value,
       genre: event.target.genre.value || "Ungiven/Unknown",
       lucid: event.target.lucid.value,
       intensity: parseInt(event.target.intensity.value) || "Ungiven/Unknown",
@@ -21,6 +23,7 @@ function DreamSubmitForm(props){
   return (
     <React.Fragment>
     <ReusableForm
+    dreamer = {props.dreamUser}
     formSummissionHandler = {handleNewDreamFormSubmission}
     notChecked = {props.boxNotChecked}
     whenCheckboxChecked = {props.onCheckboxChecked}
