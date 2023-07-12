@@ -12,7 +12,7 @@ function ReusableForm(props) {
         <input
           type='text'
           name='genre'
-          placeholder={props.genre}/>
+          placeholder={props.dreamGenre}/>
 
         <br />
         <br />
@@ -21,41 +21,42 @@ function ReusableForm(props) {
           type='checkbox'
           name='lucid'
           className="form-check-input"
-          onChange={props.onCheckboxChecked}
-          placeholder={props.lucid}/>
+          value={props.notChecked}
+          onChange={props.whenCheckboxChecked}
+          />
         <br />
         <br />
         <label>What was the intensity level of your dream? </label>
         <input
           type='number'
           name='intensity'
-          placeholder={props.intensity}/>
+          placeholder={props.dreamIntensity}/>
         <br />
         <br />
         <label>What stage of REM would you say you were in? <a href='/rem'>View REM reference page for assistance</a> </label>
         <input
           type='text'
           name='rem'
-          placeholder={props.rem}/>
+          placeholder={props.dreamRem}/>
         <br />
         <br />
         <label>Describe your perceived dream length: </label>
         <textarea
           name='perceivedLength'
-          placeholder={props.perceivedLength}/>
+          placeholder={props.dreamLength}/>
           <br />
           <br />
         <label> Describe your emotional state in the dream: </label>
         <textarea
           name='emotionalState'
-          placeholder={props.emotionalState}/>
+          placeholder={props.dreamEmotion}/>
           
           <br />
           <br />
         <label> Did you fall asleep naturally, or was sleep otherwise induced? </label>
         <textarea
           name='condition'
-          placeholder={props.condition}/>
+          placeholder={props.dreamCondition}/>
           <br />
           <br />
           <label> Your age: </label>
@@ -65,7 +66,7 @@ function ReusableForm(props) {
           name='age'
           min-value='0'
           defaultValue= "ungiven"
-          placeholder={props.age}/>
+          placeholder={props.dreamAge}/>
           <br />
           <br />
         <button type='submit' className="btn btn-primary">{props.buttonText}</button>
@@ -77,6 +78,8 @@ function ReusableForm(props) {
 }
 
 ReusableForm.propTypes = {
+  notChecked: PropTypes.bool,
+  whenCheckboxChecked: PropTypes.func,
   formSummissionHandler: PropTypes.func,
   buttonText: PropTypes.string
 }

@@ -8,7 +8,7 @@ function DreamSubmitForm(props){
     event.preventDefault();
     props.onDreamSubmission({
       genre: event.target.genre.value,
-      lucid: (event.target.lucid.value),
+      lucid: event.target.lucid.value,
       intensity: parseInt(event.target.intensity.value),
       rem: event.target.rem.value,
       perceivedLength: event.target.perceivedLength.value,
@@ -22,6 +22,7 @@ function DreamSubmitForm(props){
     <React.Fragment>
     <ReusableForm
     formSummissionHandler = {handleNewDreamFormSubmission}
+    notChecked = {props.boxNotChecked}
     whenCheckboxChecked = {props.onCheckboxChecked}
     buttonText="Submit Dream Log" />
     </React.Fragment>
@@ -29,6 +30,7 @@ function DreamSubmitForm(props){
 };
 
 DreamSubmitForm.propTypes = {
+  boxNotChecked: PropTypes.bool,
   onDreamSubmission: PropTypes.func,
   onCheckboxChecked: PropTypes.func
 };

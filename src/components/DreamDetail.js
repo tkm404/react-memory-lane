@@ -24,8 +24,10 @@ function DreamDetail(props){
           <p>Emotional State: {dream.emotionalState}</p>
           <p>Sleep Condition(s): {dream.condition}</p>
           <p>Dreamer Age: {dream.age}</p>
+          
           <div className="mb-2">
           <Button variant="primary" size="sm" onClick ={onClickingEdit}>Edit</Button>{' '}
+
           <Button variant="primary" size="sm" onClick ={()=> onClickingDelete(dream.id)}>Delete</Button>
           </div>
           </div>

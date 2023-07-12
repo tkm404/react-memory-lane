@@ -58,6 +58,7 @@ function DreamControl() {
       setFormVisibleOnPage(false);
       setSelectedDream(null);
       setEditing(false);
+      setChecked(false);
     } else {
       setFormVisibleOnPage(!formVisibleOnPage);
     }
@@ -75,6 +76,7 @@ function DreamControl() {
 
   const handleEditClick = () => {
     setEditing(true);
+    setChecked(false);
   }
 
   const handleEditingDreamInList = async (dreamToEdit) => {
@@ -82,12 +84,14 @@ function DreamControl() {
     await updateDoc(dreamRef, dreamToEdit);
     setEditing(false);
     setSelectedDream(null);
+    setChecked(false);
   }
 
   const handleAddingNewDreamToList = async (newDreamData) => {
     const collectionRef = collection(db, "dreams");
     await addDoc(collectionRef, newDreamData);
     setFormVisibleOnPage(false);
+    setChecked(false);
   }
 
   const handleCheckboxIsChecked = () => {
@@ -115,6 +119,7 @@ function DreamControl() {
         <EditDreamForm
           dream={selectedDream}
           onEditDream={handleEditingDreamInList}
+          boxNotChecked={checked}
           onCheckboxChecked={handleCheckboxIsChecked}
         />
       buttonText = "Return to the Dreamscape";
@@ -132,6 +137,7 @@ function DreamControl() {
       currentlyVisibleState =
         <DreamSubmitForm
           onDreamSubmission={handleAddingNewDreamToList}
+          boxNotChecked={checked}
           onCheckboxChecked={handleCheckboxIsChecked}
         />
       buttonText = "Return to the Dreamscape";
