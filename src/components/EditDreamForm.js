@@ -24,6 +24,14 @@ function EditDreamForm(props) {
     <React.Fragment>
       <ReusableForm
       // pass down ticket values for placeholders
+        dreamGenre = {dream.genre}
+        dreamLucidity = {dream.lucid}
+        dreamIntensity = {dream.intensity}
+        dreamRem = {dream.rem}
+        dreamLength = {dream.perceivedLength}
+        dreamEmotion = {dream.emotionalState}
+        dreamCondition = {dream.condition}
+        dreamAge = {dream.age}
         formSummissionHandler={handleEditDreamFormSubmission}
         whenCheckboxChecked = {props.onCheckboxChecked}
         buttonText="Update Dream" />
