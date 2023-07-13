@@ -3,6 +3,7 @@ import Header from './Header';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DreamControl from './DreamControl';
 import SignIn from "./SignIn";
+import RemInfo from './RemInfo';
 
 // import './App.css';
 
@@ -13,10 +14,9 @@ function App() {
       <Routes>
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/' element={<DreamControl />} />
+        <Route path='/rem-info' element={<RemInfo />} />
       </Routes>
     </Router>
-
-
   );
 }
 

@@ -11,12 +11,11 @@ function DreamList(props){
     <Row>
       <Col>
         <React.Fragment>
-        <hr/>
         <div className="p-3 mb-2 bg-dark bg-gradient text-white rounded-5">
         {props.dreamList.map((dream) =>
         <Dream 
-        dreamerIs = {dream.dreamUser}
         whenDreamClicked={props.onDreamSelection}
+        dreamerIs = {dream.dreamUser}
         genre={dream.genre}
         lucid={dream.lucid}
         rem={dream.rem}
@@ -30,7 +29,6 @@ function DreamList(props){
         key={dream.id}/> 
         )}
         </div>
-        <hr/>
         </React.Fragment>
       </Col>
     </Row>

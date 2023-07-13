@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import  {auth} from './../firebase.js'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, } from "firebase/auth";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -43,7 +43,7 @@ function SignIn(){
         })
         .then(() => {
           setUserDisplayName(auth.currentUser.displayName);
-          setSignInSuccess(`Hey ${userDisplayName}! You've successfully signed in as ${auth.currentUser.displayName}!`);
+          setSignInSuccess(`Hey${userDisplayName}! You've successfully signed in as ${auth.currentUser.displayName}!`);
         }) 
       })
       .catch((error) => {
@@ -77,6 +77,7 @@ function SignIn(){
                 placeholder='Display Name' />
                 <label htmlFor="floatingInputCustom" className="text-black">Display Name</label>
               </Form.Floating>
+
               <Form.Floating className="mb-3">
               <Form.Control
                 input
@@ -85,6 +86,7 @@ function SignIn(){
                 placeholder='email' />
                 <label htmlFor="floatingInputCustom" className="text-black">Email address</label>
               </Form.Floating>
+
               <Form.Floating className="mb-3">
               <Form.Control
                 input
@@ -109,6 +111,7 @@ function SignIn(){
                 placeholder='email' />
                 <label htmlFor="floatingInputCustom" className="text-black">Email address</label>
               </Form.Floating>
+              
               <Form.Floating className="mb-3">
                 <Form.Control
                   input

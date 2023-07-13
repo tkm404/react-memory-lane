@@ -6,7 +6,7 @@ function Dream(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenDreamClicked(props.id)}>
-        <h3>The Dreamer: {props.dreamUser}</h3>
+        <h3>The Dreamer: {props.dreamerIs}</h3>
         <p>Dream Genre: {props.genre}</p>
         <p>Dream Lucidity: {props.lucid}</p>
         <p>Dream Intensity: {props.intensity}</p>

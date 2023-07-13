@@ -6,17 +6,23 @@ import EditDreamForm from "./EditDreamForm";
 import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import BlueDreamCatcher from "./../img/dream-catcher-blue.gif";
+import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
+
+
 
 
 
 function DreamControl() {
 
+  // state control--------------------------------
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
   const [selectedDream, setSelectedDream] = useState(null);
   const [mainDreamList, setMainDreamList] = useState([]);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState(null);
   const [checked, setChecked] = useState(false);
+
 
   const blueCatcher = {
     width: 'auto',
@@ -25,7 +31,7 @@ function DreamControl() {
     margin: 'auto'
   }
 
-
+// -------------------------------handles------------------
   useEffect(() => {
     const unSubscribe = onSnapshot(
       collection(db, "dreams"),
@@ -99,7 +105,7 @@ function DreamControl() {
     setChecked(!checked);
   }
 
-
+// ----------------View Control-----------vvvv----------------
 
   if (auth.currentUser == null) {
     return (
@@ -112,6 +118,7 @@ function DreamControl() {
     )
   
   } else if (auth.currentUser != null) {
+    
     const displayName = auth.currentUser.displayName;
 
     let currentlyVisibleState = null;
@@ -123,7 +130,6 @@ function DreamControl() {
       currentlyVisibleState =
         <EditDreamForm
           dream={selectedDream}
-          dreamUser = {displayName}
           onEditDream={handleEditingDreamInList}
           boxNotChecked={checked}
           onCheckboxChecked={handleCheckboxIsChecked}
@@ -133,7 +139,6 @@ function DreamControl() {
     } else if (selectedDream != null) {
       currentlyVisibleState =
         <DreamDetail
-          dreamUser = {displayName}
           dream={selectedDream}
           onClickingDelete={handleDeletingDream}
           onClickingEdit={handleEditClick}
@@ -152,8 +157,8 @@ function DreamControl() {
 
     } else {
       currentlyVisibleState =
+      
         <DreamList
-          // dreamUser = {displayName}
           onDreamSelection={handleChangingSelectedDream}
           dreamList={mainDreamList}
         />;
@@ -162,8 +167,11 @@ function DreamControl() {
 
     return (
       <React.Fragment>
+      <Stack gap={2} className="p-4 col-md-8 mx-auto">
+        <Button variant="secondary" onClick={handleClick}>{buttonText}</Button> 
+      </Stack>       
         {currentlyVisibleState}
-        <button onClick={handleClick}>{buttonText}</button>
+
       </React.Fragment>
     )
   }

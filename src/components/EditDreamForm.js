@@ -3,7 +3,7 @@ import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
 
 function EditDreamForm(props) {
-  const { dream, boxNotChecked, onCheckboxChecked, dreamUser  } = props;
+  const { dream, boxNotChecked, onCheckboxChecked  } = props;
 
   function handleEditDreamFormSubmission(event) {
     event.preventDefault();
@@ -19,11 +19,12 @@ function EditDreamForm(props) {
       id: dream.id
     })
   }
-
+  
   return (
     <React.Fragment>
       <ReusableForm
       // pass down ticket values for placeholders
+        dreamer = {dream.dreamUser}
         dreamGenre = {dream.genre}
         dreamLucidity = {dream.lucid}
         dreamIntensity = {dream.intensity}
@@ -33,7 +34,6 @@ function EditDreamForm(props) {
         dreamCondition = {dream.condition}
         dreamAge = {dream.age}
         
-        dreamer = {dreamUser}
         formSummissionHandler={handleEditDreamFormSubmission}
         notChecked = {boxNotChecked}
         whenCheckboxChecked = {onCheckboxChecked}

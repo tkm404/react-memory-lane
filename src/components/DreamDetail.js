@@ -6,16 +6,15 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 function DreamDetail(props){
-  const { dream, onClickingDelete, onClickingEdit, dreamUser } = props;
+  const { dream, onClickingDelete, onClickingEdit } = props;
   
   return (
     <Container>
       <Row>
         <Col>
           <React.Fragment>
-          <hr/>
           <div className="p-3 mb-2 bg-dark bg-gradient text-white rounded-5">
-          <h1>Dreamers Dream: {dreamUser}</h1>
+          <h1>Dreamers Dream: {dream.dreamUser}</h1>
           <p>Genre: {dream.genre}</p>
           <p>Lucidity: {dream.lucid}</p>
           <p>Intensity: {dream.intensity}</p>
@@ -24,14 +23,12 @@ function DreamDetail(props){
           <p>Emotional State: {dream.emotionalState}</p>
           <p>Sleep Condition(s): {dream.condition}</p>
           <p>Dreamer Age: {dream.age}</p>
-          
           <div className="mb-2">
           <Button variant="primary" size="sm" onClick ={onClickingEdit}>Edit</Button>{' '}
 
           <Button variant="primary" size="sm" onClick ={()=> onClickingDelete(dream.id)}>Delete</Button>
           </div>
           </div>
-          <hr/>
         </React.Fragment>
       </Col>
     </Row>
