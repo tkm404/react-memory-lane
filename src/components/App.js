@@ -5,8 +5,6 @@ import DreamControl from './DreamControl';
 import SignIn from "./SignIn";
 import RemInfo from './RemInfo';
 
-// import './App.css';
-
 function App() {
   return (
     <Router>

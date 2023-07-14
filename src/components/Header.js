@@ -5,7 +5,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import CatcherGif from './../img/dreamcather-series.gif'
 
-
 function Header() {
 
   return (

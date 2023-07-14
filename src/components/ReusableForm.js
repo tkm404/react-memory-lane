@@ -6,9 +6,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-// find way to unbox dreamer name input
-
-
 function ReusableForm(props) {
   return(
     <React.Fragment>
@@ -19,7 +16,7 @@ function ReusableForm(props) {
               <Form.Group  controlId='formGridUser'>
               <Form.Label>Tell us about your dream,</Form.Label>
               <Form.Control 
-                input 
+                // input 
                 type="text"
                 name="dreamUser"
                 defaultValue={props.dreamer}
@@ -30,7 +27,7 @@ function ReusableForm(props) {
               <Form.Group controlId='formUserGenre'>
               <Form.Label>Can you recall the dream genre?</Form.Label> 
               <Form.Control 
-                input
+                // input
                 type='text'
                 name='genre'
                 // placeholders passed down from Edit form
@@ -44,7 +41,7 @@ function ReusableForm(props) {
               <Form.Group controlId='formGridLevel'>
               <Form.Label>Intensity level?</Form.Label>
               <Form.Control 
-                input
+                // input
                 type='number'
                 name='intensity'
                 placeholder={props.dreamIntensity} />
@@ -54,7 +51,7 @@ function ReusableForm(props) {
               <Form.Group as={Col} controlId='formGridRem'>
               <Form.Label>REM Stage?</Form.Label>
               <Form.Control 
-                input
+                // input
                 type='text'
                 name='rem'
                 placeholder={props.dreamRem}/>
@@ -64,7 +61,7 @@ function ReusableForm(props) {
               <Form.Group controlId='formGridAge'>
               <Form.Label>Your age:</Form.Label>
               <Form.Control 
-                input
+                // input
                 type='number'
                 name='age'
                 min-value='0'
@@ -89,7 +86,7 @@ function ReusableForm(props) {
           <Form.Group className='mb-3' controlId='formLength'>
           <Form.Label>Describe your perceived dream length:</Form.Label>
           <Form.Control 
-            textarea
+            // textarea
             name='perceivedLength'
             placeholder={props.dreamLength}/>
           </Form.Group>
@@ -97,7 +94,7 @@ function ReusableForm(props) {
           <Form.Group className='mb-3' controlId='formGridEmotion'>
           <Form.Label>Describe your emotional state in the dream:</Form.Label>
           <Form.Control 
-            textarea
+            // textarea
             name='emotionalState'
             placeholder={props.dreamEmotion}/>
           </Form.Group>
@@ -105,7 +102,7 @@ function ReusableForm(props) {
           <Form.Group className='mb-3' controlId='formGridSleep'>
           <Form.Label>Did you fall asleep naturally, or was sleep otherwise induced?</Form.Label>
           <Form.Control 
-            textarea
+            // textarea
             name='condition'
             placeholder={props.dreamCondition} />
           </Form.Group>

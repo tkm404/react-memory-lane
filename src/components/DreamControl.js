@@ -3,15 +3,14 @@ import DreamDetail from "./DreamDetail";
 import DreamList from "./DreamList";
 import DreamSubmitForm from "./DreamSubmitForm";
 import EditDreamForm from "./EditDreamForm";
+import EditUnauth from "./EditUnauth";
+import DeleteDream from "./DeleteDream";
 import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import BlueDreamCatcher from "./../img/dream-catcher-blue.gif";
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
-
-
-
-
+import Container from 'react-bootstrap/Container';
 
 function DreamControl() {
 
@@ -22,6 +21,7 @@ function DreamControl() {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState(null);
   const [checked, setChecked] = useState(false);
+  const [deleteReady, setDeleteReady] = useState(false);
 
 
   const blueCatcher = {
@@ -66,6 +66,7 @@ function DreamControl() {
       setSelectedDream(null);
       setEditing(false);
       setChecked(false);
+      setDeleteReady(false);
     } else {
       setFormVisibleOnPage(!formVisibleOnPage);
     }
@@ -76,9 +77,14 @@ function DreamControl() {
     setSelectedDream(selection);
   }
 
+  const handleDeleteClick = () => {
+    setDeleteReady(true);
+  }
+
   const handleDeletingDream = async (id) => {
     await deleteDoc(doc(db, "dreams", id));
     setSelectedDream(null);
+    setDeleteReady(false);
   }
 
   const handleEditClick = () => {
@@ -92,6 +98,7 @@ function DreamControl() {
     setEditing(false);
     setSelectedDream(null);
     setChecked(false);
+    setDeleteReady(false);
   }
 
   const handleAddingNewDreamToList = async (newDreamData) => {
@@ -110,10 +117,15 @@ function DreamControl() {
   if (auth.currentUser == null) {
     return (
       <React.Fragment>
-        <h1>You must be signed in to access the Dream State.</h1>
-        <div style={blueCatcher}> 
-        <img src={BlueDreamCatcher} alt="a blue dreamcatcher"/>
-        </div>
+        <Container>
+          <hr />
+          <div className="p-3 mb-2 bg-dark bg-gradient text-white rounded-5">
+          <h3>You must be signed in to access the Dream State.</h3>
+            <div className="text-center" style={blueCatcher}> 
+            <img src={BlueDreamCatcher} alt="a blue dreamcatcher"/>
+            </div>
+          </div>
+        </Container>
       </React.Fragment>
     )
   
@@ -126,7 +138,27 @@ function DreamControl() {
 
     if (error) {
       currentlyVisibleState = <p>There was an error accessing your Dream State: {error}</p>
+    } else if (deleteReady) {
+      if (displayName !== selectedDream.dreamUser) {
+        currentlyVisibleState=
+        <EditUnauth
+        />
+        buttonText="Return to the Dreamscape"
+      } else {
+        currentlyVisibleState=
+        <DeleteDream 
+        dream = {selectedDream}
+        onClickingDeleteFoReal = {handleDeletingDream}
+        />
+        buttonText="Return to the Dreamscape"
+      }
     } else if (editing) {
+      if (displayName !== selectedDream.dreamUser) {
+        currentlyVisibleState = 
+        <EditUnauth
+        />
+        buttonText = "Return to the Dreamscape"        
+      } else {
       currentlyVisibleState =
         <EditDreamForm
           dream={selectedDream}
@@ -135,12 +167,12 @@ function DreamControl() {
           onCheckboxChecked={handleCheckboxIsChecked}
         />
       buttonText = "Return to the Dreamscape";
-
+      }
     } else if (selectedDream != null) {
       currentlyVisibleState =
         <DreamDetail
           dream={selectedDream}
-          onClickingDelete={handleDeletingDream}
+          onClickingDelete={handleDeleteClick}
           onClickingEdit={handleEditClick}
         />
       buttonText = "Return to the Dreamscape";
