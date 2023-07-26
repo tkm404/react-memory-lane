@@ -9,6 +9,11 @@ This is a project based on a prompt from Epicodus Code School's React with JS un
 * Run `npm start` to launch the app in development mode.
 * Open [http://localhost:3000](http://localhost:3000) in a web browser of your choice to view the app.
 
+
+
+
+# React Boilerplate Below with Further Info:
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
