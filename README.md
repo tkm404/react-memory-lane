@@ -1,3 +1,14 @@
+# Memory Lane - A Dream Logging Database
+### by Thomas McDowell and Eusebie Siebenberg
+
+### Overview:
+This is a project based on a prompt from Epicodus Code School's React with JS unit. It involves a database hosted via Firebase, and allows a user to create their own profile, log in and out of the application, upload a dream based on a questionnaire, and edit or delete their dream as they see fit. Users can't edit or delete other users' dreams.
+
+### Running the app:
+* Navigate to the program's root directory with a terminal of your choice.
+* Run `npm start` to launch the app in development mode.
+* Open [http://localhost:3000](http://localhost:3000) in a web browser of your choice to view the app.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
