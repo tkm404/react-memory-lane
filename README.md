@@ -9,7 +9,7 @@ This is a project based on a prompt from Epicodus Code School's React with JS un
 * Run `npm start` to launch the app in development mode.
 * Open [http://localhost:3000](http://localhost:3000) in a web browser of your choice to view the app.
 
-
+### MIT License - Copyright (c) 2023 Thomas McDowell and Eusebie Siebenberg
 
 
 # React Boilerplate Below with Further Info:
